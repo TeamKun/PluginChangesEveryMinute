@@ -121,3 +121,5 @@ run/
 server/*
 !server/.keep
 !server/server.properties
+
+!/libs/*
