@@ -40,7 +40,7 @@ public class Game {
 
         isRunning = true;
         config.remainingSecsToNext.value(config.intervalSecs.value());
-        mainTask = new ProceedTask().runTaskTimer(plugin, 20, 20 * 180);
+        mainTask = new ProceedTask().runTaskTimer(plugin, 20, 20);
 
         return true;
     }
@@ -51,6 +51,7 @@ public class Game {
         }
 
         isRunning = false;
+        currentPlugin.disablePlugin();
         currentPlugin = null;
         pluginIndex = -1;
         mainTask.cancel();
