@@ -1,7 +1,6 @@
 package net.kunmc.lab.paperplugintemplate;
 
 import net.kunmc.lab.config.BaseConfig;
-import net.kunmc.lab.value.BooleanValue;
 import net.kunmc.lab.value.StringListValue;
 import net.kunmc.lab.value.StringValue;
 import org.bukkit.Bukkit;
@@ -15,7 +14,6 @@ public class PluginProperty extends BaseConfig {
     public final StringValue projectName;
     public final StringValue explanation;
     private final StringListValue startUpCommands;
-    public final BooleanValue shouldUse = new BooleanValue(true);
 
     public PluginProperty(Plugin plugin, String pluginName, String projectName, String explanation, List<String> startUpCommands) {
         super(plugin, pluginName);
