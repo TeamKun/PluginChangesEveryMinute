@@ -53,6 +53,8 @@ public class Game {
         isRunning = false;
         currentPlugin.disablePlugin();
         currentPlugin = null;
+        config.currentPlugin.value("");
+        config.remainingSecsToNext.value(config.intervalSecs.value());
         pluginIndex = -1;
         mainTask.cancel();
 

@@ -23,7 +23,9 @@ public final class PluginChangesEveryMinute extends JavaPlugin {
         Config config = new Config(this, "gameConfig");
         game = new Game(pluginPropertyList, config, this);
 
-        ConfigCommand configCommand = new ConfigCommandBuilder(config).build();
+        ConfigCommand configCommand = new ConfigCommandBuilder(config)
+                .disableReloadCommand()
+                .build();
 
         FlyLib.create(this, builder -> {
             builder.command(new MainCommand("pluginchanges", configCommand));
