@@ -1,4 +1,4 @@
-package net.kunmc.lab.paperplugintemplate;
+package net.kunmc.lab.pluginchangeseveryminute;
 
 import net.kunmc.lab.config.BaseConfig;
 import net.kunmc.lab.value.StringListValue;
