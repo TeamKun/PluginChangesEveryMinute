@@ -1,5 +1,6 @@
 package net.kunmc.lab.pluginchangeseveryminute;
 
+import com.rylinaux.plugman.util.PluginUtil;
 import net.kunmc.lab.config.BaseConfig;
 import net.kunmc.lab.value.StringListValue;
 import net.kunmc.lab.value.StringValue;
@@ -10,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class PluginProperty extends BaseConfig {
-    private final StringValue pluginName;
+    public final StringValue pluginName;
     public final StringValue projectName;
     public final StringValue explanation;
     private final StringListValue startUpCommands;
@@ -33,7 +34,7 @@ public class PluginProperty extends BaseConfig {
     }
 
     public boolean pluginExists() {
-        return Bukkit.getPluginManager().getPlugin(pluginName.value()) != null;
+        return getPlugin() != null;
     }
 
     @Nullable
@@ -51,7 +52,13 @@ public class PluginProperty extends BaseConfig {
 
     public void disablePlugin() {
         if (pluginExists()) {
-            Bukkit.getPluginManager().disablePlugin(getPlugin());
+            PluginUtil.unload(getPlugin());
+        }
+    }
+
+    public void enablePlugin() {
+        if (pluginExists()) {
+            PluginUtil.load(pluginName.value());
         }
     }
 

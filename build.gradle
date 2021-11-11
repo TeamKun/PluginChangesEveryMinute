@@ -37,6 +37,7 @@ dependencies {
     //compileOnly fileTree(dir: "./server/cache/", include: "patched_1.16.5.jar")
     implementation "dev.kotx:flylib-reloaded:0.4.1"
     implementation 'com.github.TeamKun:ConfigLib:0.3.3'
+    compileOnly fileTree(dir: "./libs/", include: "PlugMan.jar")
 }
 
 def targetJavaVersion = 8
