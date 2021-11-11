@@ -29,8 +29,6 @@ public class PluginProperty extends BaseConfig {
                 .addableByCommand(false)
                 .removableByCommand(false)
                 .clearableByCommand(false);
-
-        this.saveConfigIfAbsent();
     }
 
     public boolean pluginExists() {
