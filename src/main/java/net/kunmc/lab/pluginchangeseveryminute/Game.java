@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Game {
-    private final List<PluginProperty> pluginProperties;
+    public final List<PluginProperty> pluginProperties;
     private final Config config;
     private final Plugin plugin;
     private PluginProperty currentPlugin = null;
@@ -28,13 +28,6 @@ public class Game {
         config.writeSequenceOfPlugins(pluginProperties);
         this.config = config;
         this.plugin = plugin;
-
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                pluginProperties.forEach(PluginProperty::disablePlugin);
-            }
-        }.runTaskLater(plugin, 1);
     }
 
     public boolean start() {
