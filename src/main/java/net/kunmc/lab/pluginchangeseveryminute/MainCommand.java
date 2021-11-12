@@ -1,7 +1,7 @@
 package net.kunmc.lab.pluginchangeseveryminute;
 
 import dev.kotx.flylib.command.Command;
-import net.kunmc.lab.command.ConfigCommand;
+import net.kunmc.lab.configlib.command.ConfigCommand;
 import org.jetbrains.annotations.NotNull;
 
 public class MainCommand extends Command {

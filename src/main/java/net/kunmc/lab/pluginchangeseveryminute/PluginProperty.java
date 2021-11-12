@@ -1,9 +1,9 @@
 package net.kunmc.lab.pluginchangeseveryminute;
 
 import com.rylinaux.plugman.util.PluginUtil;
-import net.kunmc.lab.config.BaseConfig;
-import net.kunmc.lab.value.StringListValue;
-import net.kunmc.lab.value.StringValue;
+import net.kunmc.lab.configlib.config.BaseConfig;
+import net.kunmc.lab.configlib.value.StringListValue;
+import net.kunmc.lab.configlib.value.StringValue;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.Nullable;

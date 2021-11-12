@@ -34,7 +34,7 @@ repositories {
 dependencies {
     compileOnly "com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT"
     implementation "dev.kotx:flylib-reloaded:0.4.1"
-    implementation 'com.github.TeamKun:ConfigLib:0.3.3'
+    implementation 'com.github.TeamKun:ConfigLib:0.3.4'
     compileOnly fileTree(dir: "./libs/", include: "PlugMan.jar")
 }
 

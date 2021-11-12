@@ -1,9 +1,9 @@
 package net.kunmc.lab.pluginchangeseveryminute;
 
 import dev.kotx.flylib.FlyLib;
-import net.kunmc.lab.command.ConfigCommand;
-import net.kunmc.lab.command.ConfigCommandBuilder;
-import net.kunmc.lab.config.BaseConfig;
+import net.kunmc.lab.configlib.command.ConfigCommand;
+import net.kunmc.lab.configlib.command.ConfigCommandBuilder;
+import net.kunmc.lab.configlib.config.BaseConfig;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
