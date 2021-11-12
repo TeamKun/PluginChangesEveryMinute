@@ -1,5 +1,8 @@
 package net.kunmc.lab.pluginchangeseveryminute;
 
+import net.kyori.adventure.text.Component;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -14,6 +17,7 @@ public class Game {
     private final Plugin plugin;
     private PluginProperty currentPlugin = null;
     private BukkitTask mainTask;
+    private BukkitTask actionBarTask;
     private boolean isRunning = false;
     private int pluginIndex = -1;
 
@@ -40,7 +44,18 @@ public class Game {
 
         isRunning = true;
         config.remainingSecsToNext.value(config.intervalSecs.value());
+
         mainTask = new ProceedTask().runTaskTimer(plugin, 20, 20);
+        actionBarTask = new BukkitRunnable() {
+            @Override
+            public void run() {
+                Bukkit.getOnlinePlayers().forEach(p -> {
+                    if (currentPlugin != null) {
+                        p.sendActionBar(Component.text(currentPlugin.projectName.value()));
+                    }
+                });
+            }
+        }.runTaskTimerAsynchronously(plugin, 0, 4);
 
         return true;
     }
@@ -57,6 +72,7 @@ public class Game {
         config.remainingSecsToNext.value(config.intervalSecs.value());
         pluginIndex = -1;
         mainTask.cancel();
+        actionBarTask.cancel();
 
         return true;
     }
@@ -74,6 +90,11 @@ public class Game {
         currentPlugin = pluginProperties.get(pluginIndex);
         currentPlugin.enablePlugin();
         currentPlugin.dispatchCommands();
+
+        Bukkit.getOnlinePlayers().forEach(p -> {
+            p.sendTitle(currentPlugin.projectName.value(), "", 20, 100, 20);
+            Bukkit.broadcast(Component.text(ChatColor.YELLOW + "プラグインの説明: " + currentPlugin.explanation.value()));
+        });
 
         config.currentPlugin.value(currentPlugin.pluginName.value());
         config.remainingSecsToNext.value(config.intervalSecs.value());
