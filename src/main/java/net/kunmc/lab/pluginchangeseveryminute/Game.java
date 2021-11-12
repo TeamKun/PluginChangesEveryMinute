@@ -78,7 +78,7 @@ public class Game {
         currentPlugin.enablePlugin();
         currentPlugin.dispatchCommands();
 
-        bossBar.setTitle(currentPlugin.pluginName.value());
+        bossBar.setTitle(currentPlugin.projectName.value());
 
         Bukkit.getOnlinePlayers().forEach(p -> {
             p.sendTitle(currentPlugin.projectName.value(), "", 20, 100, 20);
@@ -111,7 +111,7 @@ public class Game {
 
             bossBar.setProgress(((double) remain) / config.intervalSecs.value());
             Bukkit.getOnlinePlayers().forEach(bossBar::addPlayer);
-           
+
             if (remain <= 0) {
                 next();
             }
