@@ -3,6 +3,9 @@ package net.kunmc.lab.pluginchangeseveryminute;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -17,7 +20,7 @@ public class Game {
     private final Plugin plugin;
     private PluginProperty currentPlugin = null;
     private BukkitTask mainTask;
-    private BukkitTask actionBarTask;
+    private BossBar bossBar;
     private boolean isRunning = false;
     private int pluginIndex = -1;
 
@@ -37,18 +40,9 @@ public class Game {
 
         isRunning = true;
         config.remainingSecsToNext.value(config.intervalSecs.value());
-
+        bossBar = Bukkit.createBossBar("", BarColor.GREEN, BarStyle.SOLID);
         mainTask = new ProceedTask().runTaskTimer(plugin, 20, 20);
-        actionBarTask = new BukkitRunnable() {
-            @Override
-            public void run() {
-                Bukkit.getOnlinePlayers().forEach(p -> {
-                    if (currentPlugin != null) {
-                        p.sendActionBar(Component.text(currentPlugin.projectName.value()));
-                    }
-                });
-            }
-        }.runTaskTimerAsynchronously(plugin, 0, 4);
+
 
         return true;
     }
@@ -65,7 +59,7 @@ public class Game {
         config.remainingSecsToNext.value(config.intervalSecs.value());
         pluginIndex = -1;
         mainTask.cancel();
-        actionBarTask.cancel();
+        bossBar.removeAll();
 
         return true;
     }
@@ -83,6 +77,8 @@ public class Game {
         currentPlugin = pluginProperties.get(pluginIndex);
         currentPlugin.enablePlugin();
         currentPlugin.dispatchCommands();
+
+        bossBar.setTitle(currentPlugin.pluginName.value());
 
         Bukkit.getOnlinePlayers().forEach(p -> {
             p.sendTitle(currentPlugin.projectName.value(), "", 20, 100, 20);
@@ -112,6 +108,10 @@ public class Game {
         public void run() {
             int remain = config.remainingSecsToNext.value() - 1;
             config.remainingSecsToNext.value(remain);
+
+            bossBar.setProgress(((double) remain) / config.intervalSecs.value());
+            Bukkit.getOnlinePlayers().forEach(bossBar::addPlayer);
+           
             if (remain <= 0) {
                 next();
             }
