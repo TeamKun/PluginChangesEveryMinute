@@ -109,7 +109,7 @@ public class Game {
             int remain = config.remainingSecsToNext.value() - 1;
             config.remainingSecsToNext.value(remain);
 
-            bossBar.setProgress(((double) remain) / config.intervalSecs.value());
+            bossBar.setProgress(Math.min((double) remain / config.intervalSecs.value(), 1.0));
             Bukkit.getOnlinePlayers().forEach(bossBar::addPlayer);
 
             if (remain <= 0) {

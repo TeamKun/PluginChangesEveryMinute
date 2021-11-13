@@ -4,13 +4,14 @@ import dev.kotx.flylib.FlyLib;
 import net.kunmc.lab.configlib.command.ConfigCommand;
 import net.kunmc.lab.configlib.command.ConfigCommandBuilder;
 import net.kunmc.lab.configlib.config.BaseConfig;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class PluginChangesEveryMinute extends JavaPlugin {
+public final class PluginChangesEveryMinute extends JavaPlugin implements Listener {
     public static Game game;
 
     @Override
@@ -31,8 +32,5 @@ public final class PluginChangesEveryMinute extends JavaPlugin {
             builder.command(new MainCommand("pluginchanges", configCommand));
         });
     }
-
-    @Override
-    public void onDisable() {
-    }
 }
+
